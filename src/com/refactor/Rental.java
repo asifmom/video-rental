@@ -1,4 +1,4 @@
-package com.twu.refactor;
+package com.refactor;
 
 public class Rental {
 

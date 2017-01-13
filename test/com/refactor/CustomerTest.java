@@ -13,9 +13,9 @@ import static org.junit.Assert.assertEquals;
 
 public class CustomerTest{
 
-	private static final String GOLD_PATH = "test/data";
+	private static final String TEST_DATA_PATH = "test/data";
 
-    private Customer dinsdale = new Customer("Dinsdale Pirhana");
+    private Customer customerWithRental = new Customer("Dinsdale Pirhana");
 
     private Movie python = new Movie("Monty Python and the Holy Grail", Movie.REGULAR);
 	private Movie ran = new Movie("Ran", Movie.REGULAR);
@@ -25,39 +25,39 @@ public class CustomerTest{
 
     @Before
 	public void setUp (){
-       dinsdale.addRental(new Rental (python, 3));
-       dinsdale.addRental(new Rental (ran, 1));
-       dinsdale.addRental(new Rental (la, 2));
-       dinsdale.addRental(new Rental (trek, 1));
-       dinsdale.addRental(new Rental (wallace, 6));
+       customerWithRental.addRental(new Rental (python, 3));
+       customerWithRental.addRental(new Rental (ran, 1));
+       customerWithRental.addRental(new Rental (la, 2));
+       customerWithRental.addRental(new Rental (trek, 1));
+       customerWithRental.addRental(new Rental (wallace, 6));
    }
 
    @Test
    public void shouldGenerateStatementForCustomerWithNoRentals() throws Exception {
-    	dinsdale = new Customer("Dinsdale Pirhana");
-        equalsFile("1st Output", "outputEmpty", dinsdale.statement());
+    	Customer customerWithNoRental = new Customer("Dinsdale Pirhana");
+        equalsFile("output empty", "outputEmpty", customerWithNoRental.statement());
     }
     @Test
     public void shouldGenerateStatementForCustomerWithRentals() throws Exception {
-        equalsFile("1st Output", "output1", dinsdale.statement());
+        equalsFile("output1", "output1", customerWithRental.statement());
     }
 
     @Test
     public void shouldGenerateStatementForCustomerWithModifiedRentals() throws Exception {
     	la.setPriceCode(Movie.REGULAR);
-        equalsFile("1st Output", "outputChange", dinsdale.statement());
+        equalsFile("outputChange", "outputChange", customerWithRental.statement());
     }
 
     /*
     public void testHtml() throws Exception {
-        equalsFile("1st Output", "outputHtml", dinsdale.htmlStatement());
+        equalsFile("1st Output", "outputHtml", customerWithRental.htmlStatement());
     }
     */
     	
     protected void equalsFile(String message, String fileName, String actualValue) throws IOException{
-        BufferedReader file = new BufferedReader (new FileReader (GOLD_PATH + '/' + fileName));
+        BufferedReader file = new BufferedReader (new FileReader (TEST_DATA_PATH + '/' + fileName));
         BufferedReader actualStream = new BufferedReader (new StringReader (actualValue));
-        String thisFileLine = null;
+        String thisFileLine;
         while  ((thisFileLine = file.readLine()) != null) {
             assertEquals ("in file: " + fileName, thisFileLine, actualStream.readLine());
         }

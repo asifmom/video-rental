@@ -1,13 +1,17 @@
-package com.twu.refactor;
+package com.refactor;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-public class CustomerTest extends TestCase {
+
+public class CustomerTest{
 
 	private static final String GOLD_PATH = "test/data";
 
@@ -19,7 +23,8 @@ public class CustomerTest extends TestCase {
 	private Movie trek = new Movie("Star Trek 13.2", Movie.NEW_RELEASE);
 	private Movie wallace = new Movie("Wallace and Gromit", Movie.CHILDRENS);
 
-    public void setUp (){
+    @Before
+	public void setUp (){
        dinsdale.addRental(new Rental (python, 3));
        dinsdale.addRental(new Rental (ran, 1));
        dinsdale.addRental(new Rental (la, 2));
@@ -27,14 +32,17 @@ public class CustomerTest extends TestCase {
        dinsdale.addRental(new Rental (wallace, 6));
    }
 
-    public void testEmpty() throws Exception {
+   @Test
+   public void testEmpty() throws Exception {
     	dinsdale = new Customer("Dinsdale Pirhana");
         equalsFile("1st Output", "outputEmpty", dinsdale.statement());
     }
+    @Test
     public void testCustomer() throws Exception {
         equalsFile("1st Output", "output1", dinsdale.statement());
     }
 
+    @Test
     public void testChange() throws Exception {
     	la.setPriceCode(Movie.REGULAR);
         equalsFile("1st Output", "outputChange", dinsdale.statement());

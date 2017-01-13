@@ -35,17 +35,17 @@ public class CustomerTest{
    @Test
    public void shouldGenerateStatementForCustomerWithNoRentals() throws Exception {
     	Customer customerWithNoRental = new Customer("Dinsdale Pirhana");
-        equalsFile("output empty", "outputEmpty", customerWithNoRental.statement());
+        equalsFile("outputEmpty", customerWithNoRental.statement());
     }
     @Test
     public void shouldGenerateStatementForCustomerWithRentals() throws Exception {
-        equalsFile("output1", "output1", customerWithRental.statement());
+        equalsFile("output1", customerWithRental.statement());
     }
 
     @Test
     public void shouldGenerateStatementForCustomerWithModifiedRentals() throws Exception {
     	la.setPriceCode(Movie.REGULAR);
-        equalsFile("outputChange", "outputChange", customerWithRental.statement());
+        equalsFile("outputChange", customerWithRental.statement());
     }
 
     /*
@@ -54,7 +54,7 @@ public class CustomerTest{
     }
     */
     	
-    protected void equalsFile(String message, String fileName, String actualValue) throws IOException{
+    protected void equalsFile(String fileName, String actualValue) throws IOException{
         BufferedReader file = new BufferedReader (new FileReader (TEST_DATA_PATH + '/' + fileName));
         BufferedReader actualStream = new BufferedReader (new StringReader (actualValue));
         String thisFileLine;

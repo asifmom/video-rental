@@ -48,12 +48,11 @@ public class CustomerTest{
         equalsFile("outputChange", customerWithRental.statement());
     }
 
-    /*
+    @Test
     public void testHtml() throws Exception {
-        equalsFile("1st Output", "outputHtml", customerWithRental.htmlStatement());
+        equalsFile("outputHtml", customerWithRental.htmlStatement());
     }
-    */
-    	
+
     protected void equalsFile(String fileName, String actualValue) throws IOException{
         BufferedReader file = new BufferedReader (new FileReader (TEST_DATA_PATH + '/' + fileName));
         BufferedReader actualStream = new BufferedReader (new StringReader (actualValue));

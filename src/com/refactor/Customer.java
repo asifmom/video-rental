@@ -1,6 +1,7 @@
 package com.refactor;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 
 public class Customer {
@@ -36,6 +37,22 @@ public class Customer {
 		result += "You earned " + String.valueOf(getTotalFrequentPoint())
 				+ " frequent renter points";
 		return result;
+	}
+
+
+    public String htmlStatement(){
+        Iterator<Rental> rentals = rentalList.iterator();
+        String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>";
+        while (rentals.hasNext()) {
+            Rental each = rentals.next(); //show figures for each rental
+            result += each.getMovie().getTitle()+ ": " +
+                    String.valueOf(each.getCharge()) + "<BR>";
+        }
+        result += "<P>You owe <EM>" + String.valueOf(getTotalCharge()) +
+                "</EM><P>" ;
+        result += "On this rental you earned <EM>" +
+                String.valueOf(getTotalFrequentPoint())+"</EM> frequent renter points<P>";
+        return result;
 	}
 
 	private double getTotalCharge(){
